@@ -1,0 +1,949 @@
+:root {
+  --bg: #f3f4f6;
+  --card-bg: #ffffff;
+  --accent: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.08);
+  --text: #111827;
+  --muted: #6b7280;
+  --danger: #dc2626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+}
+
+
+.topbar {
+  height: 54px;
+  background: #fff;
+  border-bottom: 1px solid rgba(15,23,42,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.tagline {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.nav-right {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.logout-link {
+  color: #dc2626;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.user-pill {
+  background: rgba(99, 102, 241, 0.12);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.87rem;
+}
+.secondary-btn {
+  background: #fff;
+  color: var(--accent);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.hero-shell {
+  max-width: 900px;
+  margin: 22px auto;
+  padding: 16px;
+}
+
+.hero-shell h1 {
+  font-size: 2.4rem;
+  margin-bottom: 6px;
+}
+
+.app-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 30px 16px 60px;
+}
+
+.app-shell.narrow {
+  max-width: 540px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 0.8rem;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.summary-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: #fff;
+  padding: 14px 14px 16px;
+  border-radius: 18px;
+  flex: 1 1 210px;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.03);
+}
+
+.stat-card .stat-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.stat-card .stat-value {
+  font-size: 1.6rem;
+}
+
+.stat-card.overdue {
+  background: #fee2e2;
+}
+
+.stat-card.today {
+  background: #fff7ed;
+}
+
+.stat-card.done {
+  background: #d1fae5;
+}
+
+.habit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.habit-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 18px 20px 16px;
+  box-shadow: 0 10px 25px rgba(15,23,42,0.07);
+}
+
+.habit-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.habit-name {
+  font-weight: 600;
+  font-size: 1.03rem;
+}
+
+.frequency-pill {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--accent);
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  margin-left: 6px;
+  text-transform: capitalize;
+}
+
+.mark-btn {
+  background: #4f46e5;
+  border: none;
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-right: 6px;
+}
+
+.delete-btn {
+  background: rgba(79,70,229,0.12);
+  border: none;
+  color: #fff;
+  padding: 7px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  background: #6366f1;
+}
+
+.done-text {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 20px 26px;
+  border: 1px solid rgba(148,163,184,0.1);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
+  margin-top: 18px;
+}
+
+.form-card.wide {
+  max-width: 520px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  font-size: 0.95rem;
+}
+
+button[type="submit"], .form-card button {
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.flash-success {
+  background: #ecfdf3;
+  border: 1px solid rgba(34,197,94,0.2);
+  color: #166534;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.flash-error {
+  background: #fee2e2;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  color: #991b1b;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.attention-box {
+  background: #fff7ed;
+  border: 1px solid rgba(251, 146, 60, 0.4);
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  color: #9a3412;
+}
+
+.attention-box ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 0.9rem;
+}
+
+/* reminders */
+.reminder-success {
+  color: #166534;
+}
+.reminder-warn {
+  color: #92400e;
+}
+.reminder-danger {
+  color: #991b1b;
+  font-weight: 500;
+}
+/* ----- Habit stats row on /habits ----- */
+
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* each stat card: same width, nice padding */
+.stat-card {
+  flex: 1 1 260px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+/* basic text inside card */
+.stat-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* smaller gray text under value */
+.muted.small {
+  font-size: 0.82rem;
+}
+
+/* attention + done colors */
+.stat-card.attention {
+  background: #fff7ed;           /* soft orange */
+  border-color: rgba(251, 146, 60, 0.5);
+}
+
+.stat-card.done {
+  background: #dcfce7;           /* soft green */
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+/* ================================
+   UNIVERSAL NAV BUTTON STYLING
+   ================================ */
+
+/* top navigation bar */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 34px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+  background: #f8fafc;
+}
+
+/* branding */
+.brand-title {
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: #1e293b;
+  text-decoration: none;
+}
+
+.tagline {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+  margin-top: -4px;
+}
+
+/* right side nav */
+.nav-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* username chip */
+.user-pill {
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: #e0e7ff;
+  color: #3730a3;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid rgba(79, 70, 229, 0.25);
+}
+
+/* navigation buttons */
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  background: #eef2ff;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4f46e5;
+  border: 1px solid rgba(129, 140, 248, 0.5);
+  text-decoration: none;
+  transition: 0.15s ease-in-out;
+}
+
+.nav-btn:hover {
+  background: #e0e7ff;
+  transform: translateY(-2px);
+}
+
+/* danger button like logout */
+.nav-btn.danger {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: rgba(248, 113, 113, 0.5);
+}
+
+.nav-btn.danger:hover {
+  background: #fecaca;
+}
+
+/* “Add habit” button anywhere */
+.add-link {
+  display: inline-flex;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+  margin-top: 14px;
+  transition: 0.15s ease;
+}
+
+.add-link:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* back button */
+.back-btn {
+  display: inline-flex;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(3, 105, 161, 0.3);
+  transition: 0.15s ease-in-out;
+}
+
+.back-btn:hover {
+  background: #bae6fd;
+}
+
+/* ===============================
+   THEME UPGRADE – HABIT TRACKER
+   =============================== */
+
+/* Soft gradient background behind the whole app */
+body {
+  background:
+    radial-gradient(circle at top left, rgba(129,140,248,0.23), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(45,212,191,0.22), transparent 55%),
+    var(--bg);
+}
+
+/* Top navigation – glassy dark bar */
+.topbar {
+  height: 56px;
+  background: linear-gradient(90deg, rgba(15,23,42,0.96), rgba(30,64,175,0.96));
+  border-bottom: 1px solid rgba(148,163,184,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #f9fafb;
+}
+
+.tagline {
+  font-size: 0.75rem;
+  color: rgba(209,213,219,0.85);
+}
+
+.nav-link,
+.logout-link {
+  color: #e5e7eb;
+}
+
+.nav-link:hover {
+  color: #a5b4fc;
+}
+
+.logout-link {
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: rgba(148,163,184,0.35);
+  font-size: 0.8rem;
+}
+
+/* Hero + app shells – soft glass cards */
+.hero-shell,
+.app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-shell {
+  max-width: 980px;
+  margin: 26px auto 60px;
+  padding: 26px 24px 32px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 28px;
+  border: 1px solid rgba(148,163,184,0.45);
+  box-shadow: 0 26px 70px rgba(15,23,42,0.22);
+}
+
+.hero-shell h1 {
+  font-size: 2.4rem;
+  margin-bottom: 6px;
+}
+
+.app-shell {
+  max-width: 980px;
+  margin: 32px auto 70px;
+}
+
+/* Buttons – gradient primary, soft secondary */
+.primary-btn {
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 12px 30px rgba(56,189,248,0.35);
+  border: none;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+.secondary-btn {
+  background: rgba(15,23,42,0.03);
+  color: #4f46e5;
+  border: 1px solid rgba(99,102,241,0.25);
+  text-decoration: none;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.86rem;
+}
+
+/* User chip */
+.user-pill {
+  background: rgba(15,23,42,0.3);
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+/* Habit cards – subtle gradient & border */
+.habit-card {
+  background: linear-gradient(135deg, #ffffff, #eef2ff);
+  border-radius: 22px;
+  padding: 18px 20px 16px;
+  box-shadow: 0 18px 45px rgba(15,23,42,0.15);
+  border: 1px solid rgba(165,180,252,0.8);
+}
+
+.habit-name {
+  font-weight: 600;
+}
+
+.frequency-pill {
+  background: rgba(129,140,248,0.18);
+  color: #4f46e5;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  margin-left: 8px;
+}
+
+/* Stats cards – more modern colors */
+.stat-card {
+  border-radius: 18px;
+  border: 1px solid rgba(148,163,184,0.4);
+  box-shadow: 0 12px 30px rgba(15,23,42,0.12);
+}
+
+.stat-card.overdue {
+  background: linear-gradient(135deg, #fee2e2, #fef2f2);
+}
+
+.stat-card.today {
+  background: linear-gradient(135deg, #fff7ed, #fffbeb);
+}
+
+.stat-card.done {
+  background: linear-gradient(135deg, #dcfce7, #ecfdf5);
+}
+
+/* Forms – softer glass look */
+.form-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(15,23,42,0.18);
+  border: 1px solid rgba(148,163,184,0.45);
+}
+
+/* CTA buttons on habits cards */
+.mark-btn {
+  background: linear-gradient(135deg, #4f46e5, #22c55e);
+  border: none;
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-right: 6px;
+}
+
+.delete-btn {
+  border: none;
+  color: #4b5563;
+  padding: 7px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  background: rgba(248,250,252,0.9);
+  border: 1px solid rgba(148,163,184,0.5);
+}
+
+/* Reminder text colors already exist, just make them a bit bolder */
+.done-text.reminder-success {
+  font-weight: 500;
+}
+
+.done-text.reminder-warn,
+.done-text.reminder-danger {
+  font-weight: 500;
+}
+/* ===============================
+   THEME UPGRADE – PREMIUM COLORS
+   =============================== */
+
+/* Background gradient */
+body {
+  background:
+    linear-gradient(135deg, #EEF2FF, #E0F7FA, #F0FDF4);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Top Bar */
+.topbar {
+  background: linear-gradient(90deg, #312E81, #3730A3, #1E3A8A);
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(18px);
+}
+
+/* Hero card */
+.hero-shell {
+  background: #ffffff;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+}
+
+/* Main CTA button */
+.primary-btn {
+  background: linear-gradient(135deg, #6366F1, #22C55E);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(79,70,229,0.3);
+}
+
+.primary-btn:hover {
+  filter: brightness(1.10);
+}
+
+/* Secondary button */
+.secondary-btn {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #4F46E5;
+  padding: 8px 20px;
+  border-radius: 100px;
+  backdrop-filter: blur(10px);
+}
+
+/* User pill */
+.user-pill {
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #F0F9FF;
+  backdrop-filter: blur(8px);
+}
+
+/* Habit cards */
+.habit-card {
+  background: linear-gradient(145deg, #FFFFFF, #F8FAFC);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.10);
+}
+
+/* Stats cards */
+.stat-card {
+  border-radius: 20px;
+  padding: 18px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: linear-gradient(145deg, #ffffff, #f3f4f6);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+
+/* Form cards */
+.form-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.10);
+}
+
+/* ============================================
+   BUSINESS THEME – Professional Dashboard Look
+   ============================================ */
+
+/* Soft neutral background */
+body {
+  background: linear-gradient(135deg, #F8FAFC, #EDF2F7);
+  font-family: "Poppins", sans-serif;
+}
+
+/* Top bar – solid navy */
+.topbar {
+  background: #1E293B;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.brand {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.tagline {
+  color: #CBD5E1;
+}
+
+/* Nav & Logout */
+.nav-link,
+.logout-link {
+  color: #E2E8F0;
+}
+
+.logout-link {
+  background: rgba(255,255,255,0.15);
+  padding: 6px 14px;
+  border-radius: 100px;
+}
+
+.logout-link:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Hero card – clean white corporate card */
+.hero-shell {
+  background: #FFFFFF;
+  border-radius: 28px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+  padding: 30px;
+}
+
+/* Buttons – business blue + teal accent */
+.primary-btn {
+  background: #2563EB;
+  color: #FFFFFF;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(37,99,235,0.25);
+}
+
+.primary-btn:hover {
+  background: #1D4ED8;
+}
+
+.secondary-btn {
+  border: 1px solid #2563EB;
+  color: #2563EB;
+  background: #FFFFFF;
+  padding: 9px 18px;
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+.secondary-btn:hover {
+  background: rgba(37,99,235,0.06);
+}
+
+/* User pill */
+.user-pill {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 5px 14px;
+  border-radius: 999px;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+/* Habit Cards */
+.habit-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.habit-name {
+  font-weight: 600;
+  color: #1E293B;
+}
+
+.frequency-pill {
+  background: #EFF6FF;
+  color: #2563EB;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+/* Stats Cards */
+.stat-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+}
+
+.stat-title {
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+/* Form Cards */
+.form-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+}
+
+/* Reminder messages */
+.reminder-success {
+  color: #0D9488;
+}
+
+.reminder-warn {
+  color: #EAB308;
+}
+
+.reminder-danger {
+  color: #DC2626;
+}
+
+/* Mark Done / Delete buttons */
+.mark-btn {
+  background: #0D9488;
+  border: none;
+  color: white;
+  padding: 7px 16px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.mark-btn:hover {
+  background: #0F766E;
+}
+
+.delete-btn {
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  color: #64748B;
+  padding: 7px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #E2E8F0;
+}
+

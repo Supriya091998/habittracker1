@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register – Habit Tracker</title>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="brand">Habit Tracker</div>
+      <div class="tagline">Create. Track. Stay consistent.</div>
+    </div>
+    <div class="nav-right">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="/login">Login</a>
+    </div>
+  </div>
+
+  <div class="app-shell narrow">
+    <div class="form-card">
+      <h2>Create account</h2>
+      <% if (error) { %>
+        <div class="flash-error"><%= error %></div>
+      <% } %>
+
+      <form method="POST" action="/register">
+        <label>Name</label>
+        <input type="text" name="name" required />
+
+        <label>Email</label>
+        <input type="email" name="email" required />
+
+        <label>Password</label>
+        <input type="password" name="password" required />
+
+        <label>Re-type password</label>
+        <input type="password" name="password2" required />
+
+        <button type="submit">Register</button>
+      </form>
+
+    </div>
+  </div>
+</body>
+</html>

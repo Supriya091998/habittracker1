@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Habit Tracker</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div class="header">
+      <div>
+        <h1>Habit Tracker</h1>
+        <p style="color:#6b7280;margin-top:4px;font-size:0.9rem">View all habits below.</p>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <!-- 👇 this is the new button you wanted -->
+        <a class="add-link" href="/habits">View all habits</a>
+        <a class="add-link" href="/habits/new">＋ Add Habit</a>
+      </div>
+    </div>
+
+    <h2 style="margin-bottom:12px;">All Habits</h2>
+
+    <div class="habit-list">
+      <% if (habits.length === 0) { %>
+        <p style="color:#6b7280;">No habits yet. Add one 👆</p>
+      <% } %>
+
+      <% habits.forEach(habit => { %>
+        <div class="habit-card">
+          <div class="habit-top">
+            <div class="habit-name">
+              <!-- show user name -->
+              <span><strong><%= habit.userName %></strong> – <%= habit.name %></span>
+              <span class="frequency-pill"><%= habit.frequency %></span>
+            </div>
+            <form method="POST" action="/habits/<%= habit._id %>/done">
+              <button class="mark-btn" type="submit">
+                ✅ <span>Mark today done</span>
+              </button>
+            </form>
+          </div>
+          <p class="done-text">
+            Done on:
+            <% if (!habit.datesDone || habit.datesDone.length === 0) { %>
+              none yet
+            <% } else { %>
+              <%= habit.datesDone.map(d => new Date(d).toDateString()).join(', ') %>
+            <% } %>
+          </p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

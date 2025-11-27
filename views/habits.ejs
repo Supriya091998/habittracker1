@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your habits – Habit Tracker</title>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="brand">Habit Tracker</div>
+      <div class="tagline">Create. Track. Stay consistent.</div>
+    </div>
+    <div class="nav-right">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="/habits/stats">Stats</a>
+      <div class="user-pill"><%= currentUserName %></div>
+      <a class="logout-link" href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <div class="header-row">
+      <div>
+        <h1>My habits</h1>
+        <p class="muted small">Daily/weekly progress, streak reminders, and history.</p>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <a class="secondary-btn" href="/">← Back</a>
+        <a class="primary-btn" href="/habits/new">+ Add habit</a>
+      </div>
+    </div>
+
+    <div class="summary-row">
+      <div class="stat-card overdue">
+        <div class="stat-title">Overdue</div>
+        <div class="stat-value"><%= attention.length %></div>
+        <p class="muted small">Habits you still need to do.</p>
+      </div>
+      <div class="stat-card today">
+        <div class="stat-title">Do today / this week</div>
+        <div class="stat-value"><%= total %></div>
+        <p class="muted small">Total active habits.</p>
+      </div>
+      <div class="stat-card done">
+        <div class="stat-title">Completed today</div>
+        <div class="stat-value"><%= doneTodayCount %></div>
+        <p class="muted small">Habits marked as done today.</p>
+      </div>
+    </div>
+
+    <% if (message) { %>
+      <div class="flash-success"><%= message %></div>
+    <% } %>
+
+    <% if (attention.length > 0) { %>
+      <div class="attention-box">
+        <strong>Habits to do today / this week:</strong>
+        <ul>
+          <% attention.forEach(a => { %>
+            <li><%= a.name %> (<%= a.frequency %>)</li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
+    <div class="habit-list">
+      <% if (habits.length === 0) { %>
+        <p class="muted">No habits yet. Create one 👆</p>
+      <% } %>
+
+      <% habits.forEach(habit => { %>
+        <div class="habit-card">
+          <div class="habit-top">
+            <div>
+              <div class="habit-name">
+                <%= habit.name %>
+                <span class="frequency-pill"><%= habit.frequency %></span>
+              </div>
+              <p class="muted small">
+                Streak:
+                <% if (habit.streak > 0) { %>
+                  <strong><%= habit.streak %> <%= habit.frequency === 'weekly' ? 'week(s)' : 'day(s)' %></strong>
+                <% } else { %>
+                  no current streak
+                <% } %>
+              </p>
+            </div>
+            <div>
+              <form method="POST" action="/habits/<%= habit._id %>/done" style="display:inline;">
+                <button class="mark-btn" type="submit">Mark today done</button>
+              </form>
+              <form method="POST" action="/habits/<%= habit._id %>/delete" style="display:inline;">
+                <button class="delete-btn" type="submit">Delete</button>
+              </form>
+            </div>
+          </div>
+
+          <p class="done-text <%= habit.reminderClass %>"><%= habit.reminderText %></p>
+
+          <p class="done-text">
+            Done on:
+            <% if (!habit.datesDone || habit.datesDone.length === 0) { %>
+              none yet
+            <% } else { %>
+              <%= habit.datesDone.map(d => new Date(d).toDateString()).join(', ') %>
+            <% } %>
+          </p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

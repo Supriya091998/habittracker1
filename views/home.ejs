@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Habit Tracker</title>
+  <meta charset="UTF-8" />
+
+  <!-- Poppins font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="brand">Habit Tracker</div>
+      <div class="tagline">Create. Track. Stay consistent.</div>
+    </div>
+    <div class="nav-right">
+      <% if (currentUserName) { %>
+        <div class="user-pill"><%= currentUserName %></div>
+        <a class="nav-link" href="/habits">My habits</a>
+        <a class="logout-link" href="/logout">Logout</a>
+      <% } else { %>
+        <a class="nav-link" href="/login">Login</a>
+        <a class="primary-btn" href="/register">Register</a>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="hero-shell" style="display:flex; gap:24px; align-items:center; flex-wrap:wrap;">
+    <div style="flex:1 1 260px;">
+      <h1>Build better habits, one day at a time.</h1>
+      <p class="muted">
+        Track daily or weekly routines, keep streaks, and see your progress in a clean dashboard.
+      </p>
+
+      <div class="actions-row" style="margin-top:18px;">
+        <% if (currentUserName) { %>
+          <a class="primary-btn" href="/habits">Go to my habits</a>
+        <% } else { %>
+          <a class="primary-btn" href="/register">Get started</a>
+          <a class="secondary-btn" href="/login">Login</a>
+        <% } %>
+      </div>
+    </div>
+
+    <div style="flex:1 1 260px; text-align:center;">
+      <img
+        src="/images/habit-hero.png"
+        alt="Person building daily habits with a calendar and checklist"
+        style="
+          max-width: 360px;
+          width: 100%;
+          border-radius: 30px;
+          box-shadow: 0 30px 60px rgba(0,0,0,0.20);
+        "
+      />
+    </div>
+  </div>
+</body>
+</html>

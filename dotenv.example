@@ -1,0 +1,11 @@
+# Example environment configuration for Habit Tracker
+# Copy this file to ".env" and fill in real values before running
+
+# MongoDB connection string
+MONGO_URI=
+
+# Secret key for session encryption
+SESSION_SECRET=some-long-random-string
+
+# Port for the app to run on
+PORT=3000

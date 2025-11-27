@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Habit stats – Habit Tracker</title>
+  <meta charset="UTF-8" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="brand">Habit Tracker</div>
+      <div class="tagline">Create. Track. Stay consistent.</div>
+    </div>
+    <div class="nav-right">
+      <a class="nav-link" href="/habits">Back to habits</a>
+      <a class="logout-link" href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <div class="header-row">
+      <div>
+        <h1>
+          <% if (currentUserName) { %>
+            <%= currentUserName %>, your stats
+          <% } else { %>
+            Your stats
+          <% } %>
+        </h1>
+        <p class="muted">Completions, streaks, and your last 7 days of progress.</p>
+      </div>
+      <a class="secondary-btn" href="/habits">← Back</a>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="summary-row" style="margin-top:8px;">
+      <div class="stat-card today">
+        <div class="stat-title">Daily habits</div>
+        <div class="stat-value"><%= dailyHabits.length %></div>
+        <p class="muted small">Habits you track every day.</p>
+      </div>
+      <div class="stat-card done">
+        <div class="stat-title">Weekly habits</div>
+        <div class="stat-value"><%= weeklyHabits.length %></div>
+        <p class="muted small">Habits you track once a week.</p>
+      </div>
+      <div class="stat-card overdue">
+        <div class="stat-title">Longest streak</div>
+        <% if (bestStreakHabit) { %>
+          <div class="stat-value"><%= bestStreakValue %></div>
+          <p class="muted small"><%= bestStreakHabit.name %></p>
+        <% } else { %>
+          <div class="stat-value">0</div>
+          <p class="muted small">No streaks yet.</p>
+        <% } %>
+      </div>
+      <div class="stat-card done">
+        <div class="stat-title">Most completed</div>
+        <% if (mostCompletedHabit) { %>
+          <div class="stat-value"><%= mostCompletedCount %></div>
+          <p class="muted small"><%= mostCompletedHabit.name %></p>
+        <% } else { %>
+          <div class="stat-value">0</div>
+          <p class="muted small">No completions yet.</p>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Charts grid -->
+    <div style="display:grid; grid-template-columns: minmax(0,1fr); gap:24px; margin-top:24px;">
+      <!-- Bar chart card -->
+      <div class="form-card">
+        <h3 style="margin-top:0;">Completions & streaks per habit</h3>
+        <p class="muted small" style="margin-bottom:12px;">
+          Compare how often you complete each habit versus its current streak.
+        </p>
+        <canvas id="habitBarChart" height="220"></canvas>
+      </div>
+
+      <!-- Line chart card -->
+      <div class="form-card">
+        <h3 style="margin-top:0;">Last 7 days trend</h3>
+        <p class="muted small" style="margin-bottom:12px;">
+          Total number of habit completions per day across all habits.
+        </p>
+        <canvas id="trendLineChart" height="220"></canvas>
+      </div>
+    </div>
+
+    <!-- Lists of habits by type -->
+    <div style="margin-top:24px; display:flex; gap:22px; flex-wrap:wrap;">
+      <div style="flex:1 1 280px;">
+        <h3>Daily habits</h3>
+        <ul>
+          <% dailyHabits.forEach(h => { %>
+            <li><%= h.name %> — streak: <%= h.streak %></li>
+          <% }) %>
+          <% if (dailyHabits.length === 0) { %>
+            <li class="muted">No daily habits yet.</li>
+          <% } %>
+        </ul>
+      </div>
+      <div style="flex:1 1 280px;">
+        <h3>Weekly habits</h3>
+        <ul>
+          <% weeklyHabits.forEach(h => { %>
+            <li><%= h.name %> — streak: <%= h.streak %></li>
+          <% }) %>
+          <% if (weeklyHabits.length === 0) { %>
+            <li class="muted">No weekly habits yet.</li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data from server
+    const habits = <%- JSON.stringify(habits) %>;
+    const trendLabels = <%- JSON.stringify(trendLabels) %>;
+    const trendCounts = <%- JSON.stringify(trendCounts) %>;
+
+    const labels = habits.map(h => h.name);
+    const completions = habits.map(h => (h.datesDone || []).length);
+    const streaks = habits.map(h => h.streak || 0);
+
+    // Bar chart: completions vs streaks
+    const barCtx = document.getElementById('habitBarChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Total completions',
+            data: completions,
+            backgroundColor: 'rgba(99, 102, 241, 0.7)',
+            borderColor: 'rgba(79, 70, 229, 1)',
+            borderWidth: 1,
+          },
+          {
+            label: 'Current streak',
+            data: streaks,
+            backgroundColor: 'rgba(34, 197, 94, 0.7)',
+            borderColor: 'rgba(22, 163, 74, 1)',
+            borderWidth: 1,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          tooltip: {
+            callbacks: {
+              label: (context) => `${context.dataset.label}: ${context.parsed.y}`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1 }
+          }
+        }
+      }
+    });
+
+    // Line chart: last 7 days trend
+    const lineCtx = document.getElementById('trendLineChart').getContext('2d');
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: trendLabels,
+        datasets: [
+          {
+            label: 'Completions per day',
+            data: trendCounts,
+            borderColor: 'rgba(56, 189, 248, 1)',
+            backgroundColor: 'rgba(56, 189, 248, 0.25)',
+            borderWidth: 2,
+            tension: 0.35,
+            fill: true,
+            pointRadius: 4,
+            pointHoverRadius: 5,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (context) => `Completions: ${context.parsed.y}`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1 }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

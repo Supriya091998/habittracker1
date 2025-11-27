@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create a habit – Habit Tracker</title>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="brand">Habit Tracker</div>
+      <div class="tagline">Create. Track. Stay consistent.</div>
+    </div>
+    <div class="nav-right">
+      <div class="user-pill"><%= currentUserName %></div>
+      <a class="nav-link" href="/habits">My habits</a>
+      <a class="logout-link" href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="app-shell narrow">
+    <div class="form-card">
+      <h2>New habit</h2>
+      <form method="POST" action="/habits">
+        <label>Habit name</label>
+        <input type="text" name="name" required />
+
+        <label>Frequency</label>
+        <select name="frequency" required>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+        </select>
+
+        <label>Notes (optional)</label>
+        <textarea name="notes" rows="3"></textarea>
+
+        <button type="submit">Save habit</button>
+      </form>
+
+      <a class="back-link" href="/habits">← Back</a>
+    </div>
+  </div>
+</body>
+</html>
